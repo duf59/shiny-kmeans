@@ -1,0 +1,7 @@
+{
+    "installOptions" : {
+        "installDependencies" : true,
+        "installFromRepository" : false,
+        "libraryPath" : "C:/Users/Renaud_2/Documents/R/R-3.2.0/library"
+    }
+}

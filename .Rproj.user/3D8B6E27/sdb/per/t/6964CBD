@@ -1,0 +1,16 @@
+{
+    "contents" : "# code below gets called once when running app\n\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(kernlab)\n\nshinyServer(\n    function(input,output,session) {\n        \n        # code below runs once for every new user (or page refresh)\n        \n        \n        # code below run repeatedly as needed when new values are entered\n    \n        output$varselect1 <- renderUI({\n            selectInput(\"var1\", label=\"Select first variable for clustering:\",\n                        choices=names(dataset()), selected=names(dataset())[1])  \n        })\n        output$varselect2 <- renderUI({\n            selectInput(\"var2\", label=\"Select first variable for clustering:\",\n                        choices=names(dataset()), selected=names(dataset())[2])  \n        })\n        \n        dataset <- reactive({\n            if (input$dataset==\"iris\") {\n                data(iris)\n                iris[,-5]\n            } else if (input$dataset==\"dat1\") {\n                read.table(\"data/self_test.data\", skip=1, col.names = c(\"x\",\"y\")) \n            } else data.frame()\n        })\n        \n        compute <- reactive({\n                    \n            data   <- subset(dataset(), select=c(input$var1,input$var2))\n            colnames(data) <- c(\"x\",\"y\")\n                    \n            if(input$k>nrow(unique(data))) updateNumericInput(session,\"k\", value = nrow(unique(data)))\n            if(input$k<1)                  updateNumericInput(session,\"k\", value = 1)\n            \n            if (input$kernel==\"linear\") {\n                Kclust <- kmeans(data ,input$k)\n                list(kmean.result = data.frame(data, cluster=as.factor(Kclust$cluster)),\n                     centers = as.data.frame(Kclust$centers))\n            } else if (input$kernel==\"RBF\") {\n                Kclust <- kkmeans(as.matrix(data), input$k, kernel=\"rbfdot\")\n                list(kmean.result = data.frame(data, cluster=as.factor(Kclust@.Data)),\n                    centers = data.frame(x=Kclust@centers[,1],\n                                         y=Kclust@centers[,2]))\n            }\n        })\n        \n        output$plot <- renderPlot({\n            data=compute()\n            ggplot(data=data$kmean.result, aes(x=x, y=y, color=cluster)) +\n                geom_point(size=3) + geom_point(data=data$centers,\n                                                aes(x=x, y=y, color='Center'), pch=17, size=7) +\n                ggtitle(\"Clustering result\") + xlab(input$var1) + ylab(input$var2)\n        })\n    }    \n)",
+    "created" : 1431866179363.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "539557300",
+    "id" : "6964CBD",
+    "lastKnownWriteTime" : 1431808845,
+    "path" : "C:/Users/Renaud_2/Dropbox/Coursera/Data Science Specialization/08_Developping data product/shiny-kmeans/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

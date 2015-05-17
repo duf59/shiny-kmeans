@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>K-means Clustering</title>
+  <meta charset="utf-8">
+  <meta name="description" content="K-means Clustering">
+  <meta name="author" content="Renaud Dufour">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>K-means Clustering</h1>
+    <h2>A Shiny App Illustration</h2>
+    <p>Renaud Dufour<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>What is k-means clustering ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>K-means is a distance-based method for cluster analysis in data mining</li>
+<li>It enables partitioning a set of data points into groups which are as similar as possible</li>
+<li>Each group, called cluster, is represented by its center</li>
+</ul>
+
+<h1>Algorithm</h1>
+
+<p>Given K, the number of clusters, k-means clustering works as follows:</p>
+
+<ul>
+<li>Select K points as initial centroids</li>
+<li><strong>Repeat</strong>
+
+<ul>
+<li>Form K clusters by assigning each point to its closest centroid</li>
+<li>Re-compute the centroids of each cluster</li>
+</ul></li>
+<li><strong>Until</strong> convergence criterion is satisfied</li>
+<li>Different kinds of measures can be used (L1 norm, L2 norm, cosine similarity, ...)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The Shiny App</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Illustrates K-mean clustering based on 2 datasets:
+
+<ul>
+<li>the R built in <strong>iris</strong> dataset</li>
+<li>a dataset <strong>dat1</strong> involving embedded clusters</li>
+</ul></li>
+<li>Enables to change the following parameters:
+
+<ul>
+<li>dataset to be used</li>
+<li>variables on which the clustering is to be performed (note: 2D clustering only)</li>
+<li>number of clusters</li>
+<li>type of kernel : linear or radial (RBF)</li>
+</ul></li>
+<li>When using a non-linear kernel, the datapoints are first projected into the kernel spaced before clustering is performed.<br></li>
+</ul>
+
+<p>The Application can be accessed directly <a href="https://duf59.shinyapps.io/shiny-kmeans/">here</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Example</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><strong>Left panel</strong> : iris dataset, variables <em>sepal.length</em> and <em>sepal.width</em>, 3 clusters and linear kernel</li>
+<li><strong>Right panel</strong> : dat1 dataset, variables <em>x</em> and <em>y</em>, 2 clusters and RBF kernel. There we see that using a radial kernel enables distinguishing the two embedded clusters</li>
+</ul>
+
+<p><img src="assets/fig/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Source Code and further improvements</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>The source code of the shiny App is available on my <a href="https://github.com/duf59/shiny-kmeans">GitHub Repo</a></li>
+<li>More informations on the K-means algorithm on <a href="http://en.wikipedia.org/wiki/K-means_clustering">wikipedia</a>. I also recommend the <a href="https://www.coursera.org/course/clusteranalysis">Cluster Analysis In Data Mining</a> class on Coursera, which actually inspired me this app.</li>
+<li>Some possible improvements of this app include :
+
+<ul>
+<li>using interactive graphics (rchart, googleVis)</li>
+<li>computing clustering validation measures such as purity, normalized mutual information, ... Note that such external measures require knowing the true classes of the data points, which is the case for the 2 implemented datasets but not in general. Instead one could also consider internal measures such as Beta CV.</li>
+<li>Implementing other kernels (actually kkmeans() from the kernel packahe is used to compute kmeans with RBF kernel. Other kernels built in in kkmeans() could be easily added as an input)</li>
+<li>Allow user to tune kernel parameters (actually the sigma parameter of RBF kernel is internally determined using an heuristic approach)</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is k-means clustering ?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The Shiny App'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Example'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Source Code and further improvements'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
