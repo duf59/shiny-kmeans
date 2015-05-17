@@ -1,6 +1,6 @@
 library(shiny)
 shinyUI(pageWithSidebar(
-    headerPanel("K-means clustering examples"),
+    headerPanel("K-means clustering example"),
     
     sidebarPanel(
         selectInput('dataset','Select a dataset:',c("iris","dat1")),
@@ -8,10 +8,14 @@ shinyUI(pageWithSidebar(
         uiOutput("varselect2"),
         numericInput('k', 'Number of clusters', value = 3,
                     min=1, step=1),
-        selectInput('kernel','Type of kernel:',c("linear","RBF"))
+        selectInput('kernel','Type of kernel:',c("linear","radial (RBF)"="RBF"))
     ),
     
     mainPanel(
+        h2("Instructions:"),
+        p("Select a dataset and variables to be used for clustering."),
+        p("Indicate the desired number of clusters and the type of kernel to be used."),
+        h2("Result:"),
         plotOutput('plot')
     )    
 ))

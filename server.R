@@ -17,7 +17,7 @@ shinyServer(
                         choices=names(dataset()), selected=names(dataset())[1])  
         })
         output$varselect2 <- renderUI({
-            selectInput("var2", label="Select first variable for clustering:",
+            selectInput("var2", label="Select second variable for clustering:",
                         choices=names(dataset()), selected=names(dataset())[2])  
         })
         
