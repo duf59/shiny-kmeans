@@ -92,7 +92,7 @@
 <li>number of clusters</li>
 <li>type of kernel : linear or radial (RBF)</li>
 </ul></li>
-<li>When using a non-linear kernel, the datapoints are first projected into the kernel spaced before clustering is performed.<br></li>
+<li>When using a non-linear kernel, the datapoints are first projected into the kernel space before clustering is performed.<br></li>
 </ul>
 
 <p>The Application can be accessed directly <a href="https://duf59.shinyapps.io/shiny-kmeans/">here</a></p>
@@ -108,7 +108,7 @@
   <article data-timings="">
     <ul>
 <li><strong>Left panel</strong> : iris dataset, variables <em>sepal.length</em> and <em>sepal.width</em>, 3 clusters and linear kernel</li>
-<li><strong>Right panel</strong> : dat1 dataset, variables <em>x</em> and <em>y</em>, 2 clusters and RBF kernel. There we see that using a radial kernel enables distinguishing the two embedded clusters</li>
+<li><strong>Right panel</strong> : dat1 dataset, variables <em>x</em> and <em>y</em>, 2 clusters and radial(RBF) kernel.</li>
 </ul>
 
 <p><img src="assets/fig/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" style="display: block; margin: auto;" /></p>
@@ -125,14 +125,15 @@
     <ul>
 <li>The source code of the shiny App is available on my <a href="https://github.com/duf59/shiny-kmeans">GitHub Repo</a></li>
 <li>More informations on the K-means algorithm on <a href="http://en.wikipedia.org/wiki/K-means_clustering">wikipedia</a>. I also recommend the <a href="https://www.coursera.org/course/clusteranalysis">Cluster Analysis In Data Mining</a> class on Coursera, which actually inspired me this app.</li>
-<li>Some possible improvements of this app include :
+<li>Potential improvements include :
 
 <ul>
 <li>using interactive graphics (rchart, googleVis)</li>
-<li>computing clustering validation measures such as purity, normalized mutual information, ... Note that such external measures require knowing the true classes of the data points, which is the case for the 2 implemented datasets but not in general. Instead one could also consider internal measures such as Beta CV.</li>
-<li>Implementing other kernels (actually kkmeans() from the kernel packahe is used to compute kmeans with RBF kernel. Other kernels built in in kkmeans() could be easily added as an input)</li>
-<li>Allow user to tune kernel parameters (actually the sigma parameter of RBF kernel is internally determined using an heuristic approach)</li>
+<li>computing clustering validation measures such as purity or normalized mutual information. Note that such external measures require knowing the true classes of the data points, which is the case for the 2 implemented datasets but not in general. Instead one could also consider internal measures such as Beta CV.</li>
+<li>Implementing other kernels and allow user to tune kernel parameters (actually parameter of RBF kernel is internally determined using an heuristic approach)</li>
+<li>Implementing alternative clustering techniques like k-medians or k-medoids</li>
 </ul></li>
+<li>Feel free to <a href="renaud.dufour59@gmail.com">contact</a> me for any question or suggestion !</li>
 </ul>
 
   </article>
